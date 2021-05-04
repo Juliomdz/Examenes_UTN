@@ -12,7 +12,7 @@
 #include "utn.h"
 #include <ctype.h>
 
-#define SIZE_NOMBRE 100
+
 #define SIZE_DNI 9
 #define SIZE_CUIT 12
 #define SIZE_TELEFONO 10
@@ -146,7 +146,7 @@ int utn_getNumero(int* pNumero, const char* mensaje, const char* mensajeError, i
          bufferInt >= min &&
          bufferInt <= max)
         {
-          retorno = 0;
+          retorno = 1;
           *pNumero = bufferInt;
           break;
         }
@@ -406,27 +406,30 @@ int utn_getCadenaMinusculas(char* pString, int limite, char* pMensaje, char* pMe
 
   return retorno;
 }
-
-int utn_getNombre(char* pNombre, char* pMensaje, char* pMensajeError)
+int utn_getNombre(char* pNombre, char* pMensaje, char* pMensajeError, int limite, int reintentos)
 {
   int retorno = -1;
-  char bufferString[SIZE_NOMBRE];
+  char buffer[limite];
 
-  printf("%s", pMensaje);
-  __fpurge(stdin);
-  if(pNombre != NULL && pMensaje != NULL && pMensajeError != NULL)
+  if(pNombre != NULL && pMensaje != NULL && pMensajeError != NULL && limite >= 0 && reintentos >=0)
   {
-    if(myGets(bufferString, sizeof(bufferString)) == 0 && validarNombre(bufferString, sizeof(bufferString)) == 1)
+    do
     {
-      strncpy(pNombre, bufferString, SIZE_NOMBRE);
-      retorno = 0;
-    }
-    else
-    {
-      printf("%s", pMensajeError);
-    }
+      printf(pMensaje);
+      __fpurge(stdin);
+      if(myGets(buffer, sizeof(buffer)) == 0 && validarNombre(buffer, sizeof(buffer)) == 1)
+          {
+            strncpy(pNombre, buffer, limite);
+            retorno = 0;
+            break;
+          }
+        else
+          {
+            printf(pMensajeError);
+            reintentos--;
+          }
+    }while(reintentos);
   }
-
   return retorno;
 }
 
@@ -453,25 +456,30 @@ int utn_getDni(char* pDni, char* pMensaje, char* pMensajeError)
   return retorno;
 }
 
-int utn_getCuit(char* pCuit, char* pMensaje, char* pMensajeError)
+int utn_getCuit(char* pCuit, char* pMensaje, char* pMensajeError, int limite, int reintentos)
 {
   int retorno = -1;
-  char bufferString[SIZE_CUIT];
+  char bufferString[limite];
 
   if(pCuit != NULL && pMensaje != NULL && pMensajeError != NULL)
-  {
-    printf("%s", pMensaje);
-    __fpurge(stdin);
-    if(myGets(bufferString, sizeof(bufferString)) == 0 && validarCuit(bufferString, sizeof(bufferString)) == 1)
-    {
-      strncpy(pCuit, bufferString, SIZE_CUIT);
-      retorno = 0;
-    }
-    else
-    {
-      printf("%s", pMensajeError);
-    }
-  }
+      {
+        do
+          {
+          printf("%s", pMensaje);
+          __fpurge(stdin);
+          if(myGets(bufferString, sizeof(bufferString)) == 0 && validarCuit(bufferString, sizeof(bufferString)) == 1)
+          {
+            strncpy(pCuit, bufferString, limite);
+            retorno = 0;
+            break;
+          }
+          else
+          {
+            printf("%s", pMensajeError);
+          }
+        }
+        while(reintentos);
+      }
 
   return retorno;
 }
@@ -1092,5 +1100,22 @@ int validarDireccionAltura(char* cadena, int limite)
   return retorno;
 }
 
+int utn_getContinue(char* pRespuesta,char* pMensaje,char* mensajeError,int reintentos){
+    int retorno=-1;
+    char letra[2];
 
+    do{
+        printf("%s[Y/N]",pMensaje);
+        if((!myGets(letra, 1) &&esLetra(letra)==0)&&
+            (!strncmp(letra,"y",1) || !strncmp(letra,"Y",1) || !strncmp(letra,"n",1) || !strncmp(letra,"N",1))){
+            *pRespuesta=*letra;
+            retorno=0;
+            break;
+        }
+        printf("%s",mensajeError);
+        reintentos--;
+    }while(reintentos >= 0);
+
+    return retorno;
+}
 

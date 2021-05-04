@@ -4,18 +4,27 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/PrimerParcial.c \
 ../src/arr.c \
+../src/cliente.c \
+../src/compra.c \
+../src/informes.c \
+../src/main.c \
 ../src/utn.c 
 
 OBJS += \
-./src/PrimerParcial.o \
 ./src/arr.o \
+./src/cliente.o \
+./src/compra.o \
+./src/informes.o \
+./src/main.o \
 ./src/utn.o 
 
 C_DEPS += \
-./src/PrimerParcial.d \
 ./src/arr.d \
+./src/cliente.d \
+./src/compra.d \
+./src/informes.d \
+./src/main.d \
 ./src/utn.d 
 
 

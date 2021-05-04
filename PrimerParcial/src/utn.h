@@ -151,9 +151,11 @@ int utn_getCadenaMinusculas(char* pString, int limite, char* pMensaje, char* pMe
  * \param char* pNombre: Puntero donde se almacenará el nombre ingresado
  * \param char* pMensaje: Texto para que el usuario sepa que ingresar
  * \param char* pMensajeError: Texto que nos informa de un error
+ * \param int limite: tamaño maximo de la cadena
+ * \param int reintentos: cantidad de reintentos dispoinbles
  * \return Retorna 0 (EXITO) si se obtiene el nombre o -1 (ERROR) si no
  */
-int utn_getNombre(char* pNombre, char* pMensaje, char* pMensajeError);
+int utn_getNombre(char* pNombre, char* pMensaje, char* pMensajeError, int limite, int reintentos);
 
 /**
  * \brief Le pide al usuario que ingrese un DNI
@@ -169,9 +171,11 @@ int utn_getDni(char* pDni, char* pMensaje, char* pMensajeError);
  * \param char* pCuit: Puntero donde se almacenará el CUIT ingresado
  * \param char* pMensaje: Texto para que el usuario sepa que ingresar
  * \param char* pMensajeError: Texto que nos informa de un error
+ * \param int limite: tamaño maximo de la cadena
+ * \param int reintentos: cantidad de reintentos dispoinbles
  * \return Retorna 0 (EXITO) si se obtiene el CUIT o -1 (ERROR) si no
  */
-int utn_getCuit(char* pCuit, char* pMensaje, char* pMensajeError);
+int utn_getCuit(char* pCuit, char* pMensaje, char* pMensajeError, int limite, int reintentos);
 
 /**
  * \brief Le pide al usuario una edad
@@ -365,5 +369,13 @@ int validarDireccion(char* cadena, int limite);
  * \return Retorna 1 (verdadero) si la cadena es una altura de dirección, 0 (falso) si no o -1 si hubo algún error con los argumentos
  */
 int validarDireccionAltura(char* cadena, int limite);
-
+/**
+ * \brief Pregunta al usuario si desea continuar y valida que ingres Y/y o N/n
+ * \param char* pResultado: Puntero donde se almacena el caracter
+ * \param  char* pMensaje: Texto para que el usuario sepa que ingresar
+ * \param char* mensajeError: Texto que nos indica que hubo un error
+ * \param int reintentos: cantidad de veces que se puede reintentar en caso de error
+ * \return Retorna 0 (EXITO) si se obtiene un número entre el rango o -1 (ERROR) si no
+*/
+int utn_getContinue(char* pRespuesta,char* pMensaje,char* mensajeError,int reintentos);
 #endif /* UTN_H_ */
