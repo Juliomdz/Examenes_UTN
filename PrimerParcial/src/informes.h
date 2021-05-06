@@ -11,5 +11,10 @@
 int inf_barbijoMasComprado(Compra* arrayCompras,int limite);
 int inf_contadorComprasPendientes(Compra* arrayCompras,int limite);
 int inf_menorPrecioUnitario(Compra* arrayCompras,int limite);
+int inf_clienteMasPagadas(Compra* arrayCompras, int limite);
+int inf_clienteMasPendientes(Compra* arrayCompras, int limite);
+int inf_imprimirListaPendientesDePago(Cliente* arrayClientes,int limiteClientes, Compra* arrayCompras,int limiteCompras);
+int inf_noRepetidos(Compra* arrayCompras,int limite,int* listaClientes, int statusBuscado);
+int inf_clienteMasStatus(Compra* arrayCompras,int limite,int* listaClientes, int statusBuscado, int* acumuladorCliente);
 
 #endif /* INFORMES_H_ */

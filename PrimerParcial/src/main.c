@@ -48,11 +48,12 @@ int main(void) {
       cli_altaForzada(arrayClientes,SIZE_ARRAY_CLIENTES,"Beto","Bologna","95327983214",4,&idCliente);
 
       com_altaForzada(arrayCompras,0,SIZE_ARRAY_COMPRAS,34545, "blanco", "Uruguay 158",  545,1,2,&idCompra);
-      com_altaForzada(arrayCompras,1,SIZE_ARRAY_COMPRAS,43545, "rojo", "Brasil 1236",  121,2,2,&idCompra);
+      com_altaForzada(arrayCompras,1,SIZE_ARRAY_COMPRAS,43545, "rojo", "Brasil 1236",  700,2,2,&idCompra);
       com_altaForzada(arrayCompras,2,SIZE_ARRAY_COMPRAS,9789, "negro", "Balcarce 534",  760,3,2,&idCompra);
       com_altaForzada(arrayCompras,3,SIZE_ARRAY_COMPRAS,12345, "azul", "Ayacucho 534",  600,4,1,&idCompra);
       com_altaForzada(arrayCompras,4,SIZE_ARRAY_COMPRAS,6456, "rojo", "Goenaga 654",  500,5,2,&idCompra);
-      com_altaForzada(arrayCompras,5,SIZE_ARRAY_COMPRAS,43545, "amarillo", "Brasil 1236",  360,2,1,&idCompra);
+      com_altaForzada(arrayCompras,5,SIZE_ARRAY_COMPRAS,53545, "amarillo", "Brasil 1236",  660,2,2,&idCompra);
+      com_altaForzada(arrayCompras,6,SIZE_ARRAY_COMPRAS,13545, "amarillo", "Brasil 1236", 750,2,2,&idCompra);
 
       printf("*~SISTEMA DE ADMINISTRACION DE VENTA DE BARBIJOS~*\n");
       do
@@ -82,8 +83,10 @@ int main(void) {
                     if(cli_getClienteYId(arrayClientes, SIZE_ARRAY_CLIENTES,&auxiliarIndice,&auxiliarIdCliente)==1)
                       {
                         com_imprimirCliente(arrayCompras,SIZE_ARRAY_CLIENTES,auxiliarIdCliente);
-                        cli_baja(arrayClientes,SIZE_ARRAY_CLIENTES,auxiliarIndice);
+                        if(cli_baja(arrayClientes,SIZE_ARRAY_CLIENTES,auxiliarIndice)==1)
+                          {
                         com_bajaCliente(arrayCompras,SIZE_ARRAY_COMPRAS,auxiliarIdCliente);
+                          }
                       }
                       break;
                   case 4:
@@ -119,7 +122,10 @@ int main(void) {
                             if(utn_getNumero(&subMenu,"1.Informar COLOR de barbijo que mas se compro."
                                              "\n2.Informar cantidad de compras PENDIENTES."
                                              "\n3.Informar compra con PRECIO POR UNIDAD mas bajo."
-                                             "\n4.Salir.\n","\nERROR-Opcion ingresada invalida.\n",1,12,1))
+                                             "\n4.Informar el cliente que mas compras completo."
+                                             "\n5.Informar el cliente con mas compras pendientes."
+                                             "\n6.Lista de compras pendientes de pago con información de la compra y del cliente."
+                                             "\n7.Salir.\n","\nERROR-Opcion ingresada invalida.\n",1,12,1))
                               {
                                 switch(subMenu)
                                 {
@@ -133,21 +139,27 @@ int main(void) {
                                   inf_menorPrecioUnitario(arrayCompras,SIZE_ARRAY_COMPRAS);
                                   break;
                                 case 4:
+                                  inf_clienteMasPagadas(arrayCompras,SIZE_ARRAY_COMPRAS);
+                                  break;
+                                case 5:
+                                  inf_clienteMasPendientes(arrayCompras,SIZE_ARRAY_COMPRAS);
+                                  break;
+                                case 6:
+                                  inf_imprimirListaPendientesDePago(arrayClientes,SIZE_ARRAY_CLIENTES, arrayCompras,SIZE_ARRAY_COMPRAS);
+                                  break;
+                                case 7:
                                   printf("\nRegresando al menu principal.\n");
                                   break;
                                  }
                               }
-                        }while(subMenu != 4);
+                        }while(subMenu != 7);
                       break;
                   case 9:
                        printf("¡Adios!");
                       break;
                 }
-
           }while(menu != 9);
-
           return 0;
-
 	return EXIT_SUCCESS;
 }
 

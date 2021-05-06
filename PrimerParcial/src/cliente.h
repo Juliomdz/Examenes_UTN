@@ -27,12 +27,10 @@ int cli_getCliente(Cliente* arrayClientes,int limite,int* indiceObtenido);
 int cli_getClienteYId(Cliente* arrayClientes,int limite,int* indiceObtenido, int*idBuscado);
 int cli_imprimir(Cliente* pCliente);
 int cli_imprimirArray(Cliente* array,int limite);
-int pantalla_ordenarNombre(Cliente* array,int limite);
-int pantalla_ordenarNombrePrecio(Cliente* arrayPantalla,int limite);
+int cli_buscarLugarLibre(Cliente* arrayPantalla,int* indiceLibre,int limite);
 int cli_isEmptyIndice(Cliente* pPantalla);
 int cli_buscarID(Cliente* arrayPantalla,int limite, int valorBuscado, int* indiceRespuesta);
-int cli_altaForzada(Cliente* pPantalla,int limite,char* nombre,char* apellido, char* cuit, int indice,int* id);
-int cli_buscarLugarLibre(Cliente* arrayPantalla,int* indiceLibre,int limite);
-
+int cli_altaForzada(Cliente* pPantalla,int limite,char* nombre,char* apellido,
+                    char* cuit, int indice,int* id);
 
 #endif /* CLIENTE_H_ */
